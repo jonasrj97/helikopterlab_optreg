@@ -129,7 +129,7 @@ RELATIVE_PATH_TO_ANCHOR   = ..
 MODELREF_TARGET_TYPE      = NONE
 
 #-- Support for parallel builds
-START_DIR         = C:\Users\torsteoe\DOCUME~1\TTK413~1\HELIKO~1.0\Dag3
+START_DIR         = C:\Users\torsteoe\DOCUME~1\TTK413~1\HELIKO~1.0\Dag4
 MASTER_ANCHOR_DIR = 
 
 #-- Support multi-instance code
@@ -167,7 +167,6 @@ MATLAB_INCLUDES = $(MATLAB_INCLUDES);$(MATLAB_ROOT)\rtw\c\src\ext_mode\common
 
 MATLAB_INCLUDES = $(MATLAB_INCLUDES);$(START_DIR)\helicopter_quarc_win64
 MATLAB_INCLUDES = $(MATLAB_INCLUDES);$(START_DIR)
-MATLAB_INCLUDES = $(MATLAB_INCLUDES);C:\Users\torsteoe\DOCUME~1\TTK413~1\HELIKO~1.0\Dag2
 MATLAB_INCLUDES = $(MATLAB_INCLUDES);$(MATLAB_ROOT)\toolbox\coder\rtiostream\src\utils
 MATLAB_INCLUDES = $(MATLAB_INCLUDES);C:\PROGRA~1\Quanser\QUARC\include
 

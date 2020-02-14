@@ -81,6 +81,8 @@ ax.TitleFontSizeMultiplier = 1.1; %Set title to be 1.1 times larger than other f
 %%
 subplot(3,2,4);
 plot(t6, elevationrate);
+hold on;
+plot(t, x6*180/pi);
 % One figure can have multiple axes, for example if we use subplot
 ax = gca; %get the axes handle of the current axes
 % Set the fontsize and units correctly
@@ -93,7 +95,7 @@ ax.TickLabelInterpreter = 'latex'; %Interpret Tick labels as latex
 % Label the axes, set up legend and title
 xlabel('Time [s]')
 ylabel('$Elevation rate$ [deg/s]')
-legend('Elevation rate', 'Location','NorthEast')
+legend('Elevation rate', 'Optimal', 'Location','NorthEast')
 title('Elevation rate')
 ax.TitleFontSizeMultiplier = 1.1; %Set title to be 1.1 times larger than other fonts
 %%
@@ -102,7 +104,7 @@ plot(t3, pitch);
 hold on
 plot(t, x3*180/pi);
 hold on;
-plot(t, u_star*180/pi, 'black--');
+plot(t, u1_star*180/pi, 'black--');
 % One figure can have multiple axes, for example if we use subplot
 ax = gca; %get the axes handle of the current axes
 % Set the fontsize and units correctly
@@ -121,6 +123,11 @@ ax.TitleFontSizeMultiplier = 1.1; %Set title to be 1.1 times larger than other f
 %%
 subplot(3,2,3);
 plot(t5, elevation);
+hold on;
+plot(t, x5*180/pi + 30 );
+hold on;
+plot(t, u2_star*180/pi,'black--');
+
 % One figure can have multiple axes, for example if we use subplot
 ax = gca; %get the axes handle of the current axes
 % Set the fontsize and units correctly
@@ -133,7 +140,7 @@ ax.TickLabelInterpreter = 'latex'; %Interpret Tick labels as latex
 % Label the axes, set up legend and title
 xlabel('Time [s]')
 ylabel('$Elevation$ [deg]')
-legend('Elevation', 'Location','NorthEast')
+legend('Elevation', 'Optimal','u_{star}', 'Location','NorthEast')
 title('Elevation')
 ax.TitleFontSizeMultiplier = 1.1; %Set title to be 1.1 times larger than other fonts
 %%
@@ -152,7 +159,7 @@ ax.FontSize = fontsize;
 ax.TickLabelInterpreter = 'latex'; %Interpret Tick labels as latex
 % Label the axes, set up legend and title
 xlabel('Time [s]')
-ylabel('$Pitch rate$ [deg]')
+ylabel('$Pitch rate$ [deg/s]')
 legend('Pitch rate', 'Optimal', 'Location','NorthEast')
 title('Pitch rate')
 ax.TitleFontSizeMultiplier = 1.1; %Set title to be 1.1 times larger than other fonts

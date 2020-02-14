@@ -9,7 +9,7 @@
  *
  * Model version              : 1.186
  * Simulink Coder version : 8.9 (R2015b) 13-Aug-2015
- * C source code generated on : Fri Jan 31 16:24:23 2020
+ * C source code generated on : Fri Feb 07 15:08:25 2020
  *
  * Target selection: quarc_win64.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -834,6 +834,7 @@ typedef struct {
   real_T K_ei;                         /* '<S3>/K_ei' */
   real_T Gain_l;                       /* '<S10>/Gain' */
   real_T VectorConcatenate[2];         /* '<S4>/Vector Concatenate' */
+  real_T VectorConcatenate1[2];        /* '<S4>/Vector Concatenate1' */
   real_T BackmotorSaturation;          /* '<S4>/Back motor: Saturation' */
   real_T FrontmotorSaturation;         /* '<S4>/Front motor: Saturation' */
 } B_helicopter_T;
@@ -862,14 +863,14 @@ typedef struct {
   } FromWorkspace_PWORK;               /* '<Root>/From Workspace' */
 
   struct {
+    void *LoggedData;
+  } Vd_PWORK;                          /* '<Root>/Vd' */
+
+  struct {
     void *TimePtr;
     void *DataPtr;
     void *RSimInfoPtr;
   } FromWorkspace1_PWORK;              /* '<Root>/From Workspace1' */
-
-  struct {
-    void *LoggedData;
-  } Vd_PWORK;                          /* '<Root>/Vd' */
 
   struct {
     void *LoggedData;
@@ -1033,9 +1034,6 @@ typedef struct {
 
 /* Parameters (auto storage) */
 struct P_helicopter_T_ {
-  real_T K[4];                         /* Variable: K
-                                        * Referenced by: '<Root>/Constant1'
-                                        */
   real_T K_ed;                         /* Variable: K_ed
                                         * Referenced by: '<S3>/K_ed'
                                         */
@@ -1338,9 +1336,6 @@ struct P_helicopter_T_ {
                                         */
   real_T Integrator_LowerSat;          /* Expression: -inf
                                         * Referenced by: '<S3>/Integrator'
-                                        */
-  real_T elevation_ref_Value;          /* Expression: 0
-                                        * Referenced by: '<Root>/elevation_ref'
                                         */
   real_T Backgain_Gain;                /* Expression: 0.5
                                         * Referenced by: '<S1>/Back gain'
