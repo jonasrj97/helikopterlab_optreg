@@ -3,7 +3,7 @@
 % Updated spring 2018, Andreas L. Flï¿½ten
  
 %% Initialization and model definition
-init06; % Change this to the init file corresponding to your helicopter
+init06; 
  
 % Discrete time system model. x = [lambda r p p_dot]'
 delta_t = 0.25; % sampling time
@@ -23,17 +23,17 @@ x1_0 = pi;                              % Lambda
 x2_0 = 0;                               % r
 x3_0 = 0;                               % p
 x4_0 = 0;                               % p_dot
-x0 = [x1_0 x2_0 x3_0 x4_0]';           % Initial values
+x0 = [x1_0 x2_0 x3_0 x4_0]';            % Initial values
  
 % Time horizon and initialization
-N  = 100;                                  % Time horizon for states
+N  = 100;                               % Time horizon for states
 M  = N;                                 % Time horizon for inputs
 z  = zeros(N*mx+M*mu,1);                % Initialize z for the whole horizon %SKAL DENNE LIGGE ELLER STÃ…???
 z0 = z;                                 % Initial value for optimization
  
 % Bounds
-ul      = -pi/6;                  % Lower bound on control
-uu      = pi/6;                   % Upper bound on control
+ul      = -pi/6;                        % Lower bound on control
+uu      = pi/6;                         % Upper bound on control
  
 xl      = -Inf*ones(mx,1);              % Lower bound on states (no bound)
 xu      = Inf*ones(mx,1);               % Upper bound on states (no bound)
@@ -41,7 +41,7 @@ xl(3)   = ul;                           % Lower bound on state x3
 xu(3)   = uu;                           % Upper bound on state x3
  
 % Generate constraints on measurements and inputs
-[vlb,vub]       = gen_constraints(N,M,xl,xu,ul,uu); % hint: gen_constraints
+[vlb,vub]       = gen_constraints(N,M,xl,xu,ul,uu); 
 vlb(N*mx+M*mu)  = 0;                    % We want the last input to be zero
 vub(N*mx+M*mu)  = 0;                    % We want the last input to be zero
  
@@ -51,23 +51,21 @@ Q1(1,1) = 2;                            % Weight on state x1
 Q1(2,2) = 0;                            % Weight on state x2
 Q1(3,3) = 0;                            % Weight on state x3
 Q1(4,4) = 0;                            % Weight on state x4
-P1 = 1;                                % Weight on input
-Q = gen_q(Q1,P1,N,M);                                  % Generate Q, hint: gen_q
-c = 0;    %TROR DENNE ER 0 MEN IKKE SIKKER    % Generate c, this is the linear constant term in the QP
+P1 = 1;                                 % Weight on input
+Q = gen_q(Q1,P1,N,M);                   % Generate Q, 
+c = 0;                                  % Generate c, this is the linear constant term in the QP
  
 %% Generate system matrixes for linear model
-Aeq = gen_aeq(A1,B1,N,mx,mu);   % Generate A, hint: gen_aeq
+Aeq = gen_aeq(A1,B1,N,mx,mu);           % Generate A, hint: gen_aeq
 beq = zeros(400,1);
 tempM = A1*x0;
 for i = 1:4
     beq(i) = tempM(i);
 end
  
-%[(A1*x0)' 0]'        % Generate b
- 
 %% Solve QP problem with linear model
 tic
-[z,lambda] = quadprog(Q, [], [], [], Aeq, beq, vlb, vub, z0); % hint: quadprog. Type 'doc quadprog' for more info 
+[z,lambda] = quadprog(Q, [], [], [], Aeq, beq, vlb, vub, z0); 
 t1=toc;
  
  
@@ -91,6 +89,7 @@ num_variables = 5/delta_t;
 zero_padding = zeros(num_variables,1);
 unit_padding  = ones(num_variables,1);
 
+%Adding padding to states and input so helicopter reaches steady state elevation and pitch before we implement our control sequence.
 u   = [zero_padding; u; zero_padding];
 x1  = [pi*unit_padding; x1; zero_padding];
 x2  = [zero_padding; x2; zero_padding];
@@ -99,7 +98,7 @@ x4  = [zero_padding; x4; zero_padding];
 
 t = [0:delta_t:delta_t*(length(u)-1)]';
 
-u2model = [t u];
+u2model = [t u];                        %to be used in Simulink
 
 %% Plotting
 fontsize = 20;
